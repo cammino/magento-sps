@@ -1,0 +1,5 @@
+INSTALL (for git)
+
+mkdir app/code/community/Cammino
+git submodule add git@github.com:mferracioli/magento-sps.git app/code/community/Cammino/Sps
+cp app/code/community/Cammino/Sps/Cammino_Sps.xml app/etc/modules/

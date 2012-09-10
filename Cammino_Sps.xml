@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Cammino_Sps>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Cammino_Sps>
+    </modules>
+</config>

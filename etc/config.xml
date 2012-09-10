@@ -1,0 +1,47 @@
+<config>
+	<modules>
+		<Cammino_Sps>
+			<version>0.1.0</version>
+			<depends>
+				<Mage_Payment />
+			</depends>
+		</Cammino_Sps>
+	</modules>
+	<global>
+		<models>
+			<sps>
+				<class>Cammino_Sps_Model</class>
+			</sps>
+		</models>
+		<resources>
+			<connection>
+				<use>core_setup</use>
+			</connection>
+		</resources>
+		<blocks>
+			<sps>
+				<class>Cammino_Sps_Block</class>
+			</sps>
+		</blocks>
+	</global>
+	<frontend>
+		<routers>
+			<sps>
+				<use>standard</use>
+				<args>
+					<module>Cammino_Sps</module>
+					<frontName>sps</frontName>
+				</args>
+			</sps>
+		</routers>
+	</frontend>
+	<default>
+		<payment>
+			<sps_boleto>
+				<active>0</active>
+				<model>Cammino_Sps_Model_Boleto</model>
+				<title>Bradesco Sps Boleto</title>
+			</sps_boleto>
+		</payment>
+	</default>
+</config>
