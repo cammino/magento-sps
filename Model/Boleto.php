@@ -48,7 +48,7 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		$instructions8 = $this->getConfigdata("instructions8");
 		$instructions9 = $this->getConfigdata("instructions9");
 		$instructions10 = $this->getConfigdata("instructions10");
-		$receiver = $this->getConfigdata("receiver");
+		$receiver = utf8_decode($this->getConfigdata("receiver"));
 		$bank = $this->getConfigdata("bank");
 		$agency = $this->getConfigdata("agency");
 		$account = $this->getConfigdata("account");
@@ -71,9 +71,9 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		$xml .= "<DATAEMISSAO>=(".date("d/m/Y").")\n";
 		$xml .= "<DATAPROCESSAMENTO>=(".date("d/m/Y").")\n";
 		$xml .= "<DATAVENCIMENTO>=(".date("d/m/Y", $expiresAt).")\n";
-		$xml .= "<NOMESACADO>=(".$customer->firstname." ".$customer->lastname.")\n";
-		$xml .= "<ENDERECOSACADO>=(". str_replace("\n", ", ", $billingAddress->street) .")\n";
-		$xml .= "<CIDADESACADO>=(".$billingAddress->city.")\n";
+		$xml .= "<NOMESACADO>=(".utf8_decode($customer->firstname)." ".utf8_decode($customer->lastname).")\n";
+		$xml .= "<ENDERECOSACADO>=(". utf8_decode(str_replace("\n", ", ", $billingAddress->street)) .")\n";
+		$xml .= "<CIDADESACADO>=(". utf8_decode($billingAddress->city) .")\n";
 		$xml .= "<UFSACADO>=(".$this->getRegionCode($billingAddress->region_id).")\n";
 		$xml .= "<CEPSACADO>=(".$billingAddress->postcode.")\n";
 		$xml .= "<CPFSACADO>=(".$customer->taxvat.")\n";
