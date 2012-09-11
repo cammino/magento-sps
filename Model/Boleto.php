@@ -5,11 +5,12 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 	protected $_canCapture = true;
 	protected $_code = 'sps_boleto';
 	protected $_formBlockType = 'sps/form';
+	protected $_infoBlockType = 'sps/info';
 
     public function assignData($data) {
-		$addata = new Varien_Object;	
-		$info = $this->getInfoInstance();
-		$info->setAdditionalData(serialize($addata));
+		//$addata = new Varien_Object;	
+		//$info = $this->getInfoInstance();
+		//$info->setAdditionalData(serialize($addata));
 		
         return $this;
     }
