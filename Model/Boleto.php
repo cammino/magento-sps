@@ -15,7 +15,8 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
     }
     
 	public function getOrderPlaceRedirectUrl() {
-		return Mage::getUrl('sps/boleto/receipt', array('_secure' => false));
+		# return Mage::getUrl('sps/boleto/receipt', array('_secure' => false));
+		return Mage::getUrl('sps/boleto/receipt');
 	}
 	
 	public function generateXml($orderId) {
@@ -69,13 +70,13 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		$xml .= "<ASSINATURA>=($key)\n";
 		$xml .= "<DATAEMISSAO>=(".date("d/m/Y").")\n";
 		$xml .= "<DATAPROCESSAMENTO>=(".date("d/m/Y").")\n";
-		$xml .= "<DATAVENCIMENTO>=(".date("Y-m-d", $expiresAt).")\n";
+		$xml .= "<DATAVENCIMENTO>=(".date("d/m/Y", $expiresAt).")\n";
 		$xml .= "<NOMESACADO>=(".$customer->firstname." ".$customer->lastname.")\n";
-		$xml .= "<ENDERECOSACADO>=(".$billingAddress->street.")\n";
+		$xml .= "<ENDERECOSACADO>=(". str_replace("\n", ", ", $billingAddress->street) .")\n";
 		$xml .= "<CIDADESACADO>=(".$billingAddress->city.")\n";
 		$xml .= "<UFSACADO>=(".$this->getRegionCode($billingAddress->region_id).")\n";
 		$xml .= "<CEPSACADO>=(".$billingAddress->postcode.")\n";
-		$xml .= "<CPFSACADO>=(".$customer->document1.")\n";
+		$xml .= "<CPFSACADO>=(".$customer->taxvat.")\n";
 		$xml .= "<NUMEROPEDIDO>=($orderCode)\n";
 		$xml .= "<VALORDOCUMENTOFORMATADO>=(R$".number_format($orderTotal, 2, ",", ".").")\n";
 		$xml .= "<SHOPPINGID>=($shoppingId)\n";
@@ -98,12 +99,6 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		return $xml;
 	}
 	
-	/**
-	* Returns region code
-	*
-	* @param string $regionId
-	* @return string
-	*/
 	public function getRegionCode($regionId) {
 		$regions = Mage::getModel('directory/region_api')->items("BR");
 		$regionCode = "";
