@@ -14,10 +14,6 @@ class Cammino_Sps_Block_Pay extends Mage_Payment_Block_Form {
 		
 		parent::_construct();
 	}
-
-	public function getOrderId() {
-		return $this->_orderId;
-	}
 	
 	public function getUrl() {
 		$sps = Mage::getModel('sps/boleto');
