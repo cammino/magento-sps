@@ -9,9 +9,6 @@ class Cammino_Sps_Block_Receipt extends Mage_Payment_Block_Form {
 		$order->loadByIncrementId($session->getLastRealOrderId());
 		$this->_orderId = $order->getRealOrderId();
 		$this->setTemplate("sps/receipt.phtml");
-
-		Mage::dispatchEvent('checkout_onepage_controller_success_action', array('order_ids' => array($this->_orderId)));
-		
 		parent::_construct();
 	}
 	
