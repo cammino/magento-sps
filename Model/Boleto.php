@@ -76,8 +76,8 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		$xml .= "<ENDERECOSACADO>=(". utf8_decode(str_replace("\n", ", ", $billingAddress->street)) .")\n";
 		$xml .= "<CIDADESACADO>=(". utf8_decode($billingAddress->city) .")\n";
 		$xml .= "<UFSACADO>=(".$this->getRegionCode($billingAddress->region_id).")\n";
-		$xml .= "<CEPSACADO>=(".$billingAddress->postcode.")\n";
-		$xml .= "<CPFSACADO>=(".$customer->taxvat.")\n";
+		$xml .= "<CEPSACADO>=(".preg_replace('/[^A-Za-z0-9]/', '', $billingAddress->postcode).")\n";
+		$xml .= "<CPFSACADO>=(".preg_replace('/[^A-Za-z0-9]/', '', $customer->taxvat).")\n";
 		$xml .= "<NUMEROPEDIDO>=($orderCode)\n";
 		$xml .= "<VALORDOCUMENTOFORMATADO>=(R$".number_format($orderTotal, 2, ",", ".").")\n";
 		$xml .= "<SHOPPINGID>=($shoppingId)\n";
