@@ -27,7 +27,7 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		$orderData = $order->getData();
 		$orderTotal = $order->getTotalDue();
 		$payment = $order->getPayment();
-		$addata = unserialize($payment->getData("additional_data"));
+		// $addata = unserialize($payment->getData("additional_data"));
 		
 		$customer = Mage::getModel("customer/customer");
 		$customer->load($orderData['customer_id']);
