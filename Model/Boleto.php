@@ -10,7 +10,7 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
     public function assignData($data) {
 		//$addata = new Varien_Object;	
 		//$info = $this->getInfoInstance();
-		$info->setAdditionalData(serialize($data));
+		//$info->setAdditionalData(serialize($addata));
 		
         return $this;
     }
