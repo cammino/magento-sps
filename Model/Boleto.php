@@ -58,7 +58,8 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		
 		$xml  = "<BEGIN_ORDER_DESCRIPTION>\n";
 		$xml .= "<orderid>=($orderCode)\n";
-		$xml .= "<descritivo>=(Pedido $orderId)\n";
+		$xml .= "<descritivo>=(Teste)\n";
+		// $xml .= "<descritivo>=(Pedido $orderId)\n";
 		$xml .= "<quantidade>=(1)\n";
 		$xml .= "<unidade>=(UN)\n";
 		$xml .= "<valor>=(".number_format($orderTotal, 2, "", "").")\n";
