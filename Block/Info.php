@@ -1,5 +1,5 @@
 <?php
-class Cammino_Sps_Block_Info extends Mage_Core_Block_Template {
+class Cammino_Sps_Block_Info extends Mage_Payment_Block_Info {
 	
     /**
      * Payment rendered specific information
@@ -10,7 +10,7 @@ class Cammino_Sps_Block_Info extends Mage_Core_Block_Template {
 
     protected function _construct()
     {
-		$this->setTemplate('payment/info/spsboleto.phtml');
+		// $this->setTemplate('payment/info/spsboleto.phtml');
 		parent::_construct();
     }
 
