@@ -9,6 +9,16 @@ class Cammino_Sps_Block_Receipt extends Mage_Payment_Block_Form {
 		$order->loadByIncrementId($session->getLastRealOrderId());
 		$this->_orderId = $order->getRealOrderId();
 		$this->setTemplate("sps/receipt.phtml");
+
+		$state   = 'pending_payment';
+		$status  = 'pending_payment';
+		$comment = 'Boleto gerado, aguardando pagamento.';
+
+		$order->setState($state, $status, $comment, false);
+		$order->save();
+
+		$order->sendNewOrderEmail();
+
 		parent::_construct();
 	}
 	
