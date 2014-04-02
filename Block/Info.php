@@ -22,10 +22,13 @@ class Cammino_Sps_Block_Info extends Mage_Payment_Block_Info {
 	{
 		$order = $this->getOrder();
 
+		$paymentMethod = ' (<a href="' . $this->getPayUrl() . '" onclick="this.target=\'_blank\'">Emitir Boleto</a>)';
+
 		$this->addData(array(
 			'show_paylink' => (boolean) (($order->getState() == Mage_Sales_Model_Order::STATE_NEW) || ($order->getState() == Mage_Sales_Model_Order::STATE_PENDING_PAYMENT) || ($order->getState() == Mage_Sales_Model_Order::STATE_HOLDED)),
 			'show_paylink' => true,
-			'pay_url' => $this->getPayUrl()
+			'pay_url' => $this->getPayUrl(),
+			'payment_method' => $paymentMethod,
 		));
 	}
 }
