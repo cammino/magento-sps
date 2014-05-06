@@ -2,7 +2,7 @@
 class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 	
 	protected $_canAuthorize = true;
-	protected $_canCapture = false;
+	protected $_canCapture = true;
 	protected $_canCapturePartial = false;
 	protected $_code = 'sps_boleto';
 	protected $_formBlockType = 'sps/form';
