@@ -40,22 +40,26 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		$orderCode = "$orderId";
 			
 		$merchid = $this->getConfigdata("merchid");
-		$instructions1 = $this->getConfigdata("instructions1");
-		$instructions2 = $this->getConfigdata("instructions2");
-		$instructions3 = $this->getConfigdata("instructions3");
-		$instructions4 = $this->getConfigdata("instructions4");
-		$instructions5 = $this->getConfigdata("instructions5");
-		$instructions6 = $this->getConfigdata("instructions6");
-		$instructions7 = $this->getConfigdata("instructions7");
-		$instructions8 = $this->getConfigdata("instructions8");
-		$instructions9 = $this->getConfigdata("instructions9");
-		$instructions10 = $this->getConfigdata("instructions10");
-		$receiver = utf8_decode($this->getConfigdata("receiver"));
+		$instructions1 = $this->clearString($this->getConfigdata("instructions1"));
+		$instructions2 = $this->clearString($this->getConfigdata("instructions2"));
+		$instructions3 = $this->clearString($this->getConfigdata("instructions3"));
+		$instructions4 = $this->clearString($this->getConfigdata("instructions4"));
+		$instructions5 = $this->clearString($this->getConfigdata("instructions5"));
+		$instructions6 = $this->clearString($this->getConfigdata("instructions6"));
+		$instructions7 = $this->clearString($this->getConfigdata("instructions7"));
+		$instructions8 = $this->clearString($this->getConfigdata("instructions8"));
+		$instructions9 = $this->clearString($this->getConfigdata("instructions9"));
+		$instructions10 = $this->clearString($this->getConfigdata("instructions10"));
+		$receiver = $this->clearString($this->getConfigdata("receiver"));
 		$bank = $this->getConfigdata("bank");
 		$agency = $this->getConfigdata("agency");
 		$account = $this->getConfigdata("account");
 		$key = $this->getConfigdata("key");
 		$shoppingId = $this->getConfigdata("shopping_id");
+
+		$customerName = $this->clearString($customer->firstname . " " . $customer->lastname);
+		$addressStreet = $this->clearString($billingAddress->street);
+		$addressCity = $this->clearString($billingAddress->city);
 		
 		$xml  = "<BEGIN_ORDER_DESCRIPTION>\n";
 		$xml .= "<orderid>=($orderCode)\n";
@@ -73,9 +77,9 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		$xml .= "<DATAEMISSAO>=(".date("d/m/Y").")\n";
 		$xml .= "<DATAPROCESSAMENTO>=(".date("d/m/Y").")\n";
 		$xml .= "<DATAVENCIMENTO>=(".date("d/m/Y", $expiresAt).")\n";
-		$xml .= "<NOMESACADO>=(".utf8_decode($customer->firstname)." ".utf8_decode($customer->lastname).")\n";
-		$xml .= "<ENDERECOSACADO>=(". utf8_decode(str_replace("\n", ", ", $billingAddress->street)) .")\n";
-		$xml .= "<CIDADESACADO>=(". utf8_decode($billingAddress->city) .")\n";
+		$xml .= "<NOMESACADO>=(". $customerName .")\n";
+		$xml .= "<ENDERECOSACADO>=(". $addressStreet .")\n";
+		$xml .= "<CIDADESACADO>=(". $addressCity .")\n";
 		$xml .= "<UFSACADO>=(".$this->getRegionCode($billingAddress->region_id).")\n";
 		$xml .= "<CEPSACADO>=(".preg_replace('/[^A-Za-z0-9]/', '', $billingAddress->postcode).")\n";
 		$xml .= "<CPFSACADO>=(".preg_replace('/[^A-Za-z0-9]/', '', $customer->taxvat).")\n";
@@ -114,4 +118,13 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		
 		return $regionCode;
 	}
+
+	private function clearString($str) {
+		$str = str_replace("\n", " ", $str);
+		$str = str_replace("=", "", $str);
+		$str = str_replace("(", "", $str);
+		$str = str_replace(")", "", $str);
+		return utf8_decode($str);
+	}
+
 }
