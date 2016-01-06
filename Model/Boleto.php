@@ -34,7 +34,8 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		$customer->load($orderData['customer_id']);
 		$billingAddress = $order->getBillingAddress();
 		
-		$expiresDays = 5;
+		$expiresDays = $this->getConfigdata("expires_days");
+		$expiresDays = empty($expiresDays) ? 5 : $expiresDays;
 		$expiresAt = strtotime("+$expiresDays day", strtotime($orderData["created_at"]));
 		
 		$orderCode = "$orderId";
