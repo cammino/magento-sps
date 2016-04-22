@@ -12,7 +12,7 @@ class Cammino_Sps_BoletoController extends Mage_Core_Controller_Front_Action {
 	
 	public function payAction() {
 		$block = $this->getLayout()->createBlock('sps/pay');
-		$this->getResponse()->setRedirect($block->getUrl());
+		$this->getResponse()->setRedirect($block->getExternalUrl());
 	}
 
 	function xmlAction() {

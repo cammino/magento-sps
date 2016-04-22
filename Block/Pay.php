@@ -15,7 +15,7 @@ class Cammino_Sps_Block_Pay extends Mage_Payment_Block_Form {
 		parent::_construct();
 	}
 	
-	public function getUrl() {
+	public function getExternalUrl() {
 		$sps = Mage::getModel('sps/boleto');
 		$environment = $sps->getConfigdata("environment");
 		$merchid = $sps->getConfigdata("merchid");
