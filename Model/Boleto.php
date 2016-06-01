@@ -57,7 +57,7 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		$account = $this->getConfigdata("account");
 		$key = $this->getConfigdata("key");
 		$shoppingId = $this->getConfigdata("shopping_id");
-		$wallet = $this->getConfigdata("shopping_id");
+		$wallet = $this->getConfigdata("wallet");
 		$wallet = strval($wallet) == "" ? "25" : $wallet;
 
 		$customerName = $this->clearString($customer->firstname . " " . $customer->lastname);
