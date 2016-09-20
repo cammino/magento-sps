@@ -1,5 +1,5 @@
 <?php
-class Cammino_Sps_Block_Info extends Mage_Payment_Block_Info {
+class Cammino_Sps_Block_Boleto_Info extends Mage_Payment_Block_Info {
 	
     protected $_paymentSpecificInformation = null;
 

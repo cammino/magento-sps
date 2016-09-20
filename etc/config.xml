@@ -42,6 +42,12 @@
 				<model>Cammino_Sps_Model_Boleto</model>
 				<title>Bradesco Sps Boleto</title>
 			</sps_boleto>
+
+			<sps_transfer>
+				<active>0</active>
+				<model>Cammino_Sps_Model_Transfer</model>
+				<title>Bradesco Sps Transfer</title>
+			</sps_transfer>
 		</payment>
 	</default>
 </config>

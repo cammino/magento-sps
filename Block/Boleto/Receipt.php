@@ -1,5 +1,5 @@
 <?php
-class Cammino_Sps_Block_Receipt extends Mage_Payment_Block_Form {
+class Cammino_Sps_Block_Boleto_Receipt extends Mage_Payment_Block_Form {
 	
 	private $_orderId;
 	
@@ -8,7 +8,7 @@ class Cammino_Sps_Block_Receipt extends Mage_Payment_Block_Form {
 		$order = Mage::getModel("sales/order");
 		$order->loadByIncrementId($session->getLastRealOrderId());
 		$this->_orderId = $order->getRealOrderId();
-		$this->setTemplate("sps/receipt.phtml");
+		$this->setTemplate("sps/boleto/receipt.phtml");
 
 		$state   = 'pending_payment';
 		$status  = 'pending_payment';
