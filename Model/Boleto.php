@@ -7,6 +7,7 @@ class Cammino_Sps_Model_Boleto extends Cammino_Sps_Model_Sps {
 	protected $_code              = 'sps_boleto';
 	protected $_formBlockType     = 'sps/boleto_form';
 	protected $_infoBlockType     = 'sps/boleto_info';
+	protected $customer;
 
 	/**
 	  * Add addiotionalData to order.
@@ -21,6 +22,16 @@ class Cammino_Sps_Model_Boleto extends Cammino_Sps_Model_Sps {
 		// $info->setAdditionalData(serialize($addata));
 		
         return $this;
+    }
+
+    /**
+	  * Return object with data customer.
+	  *
+	  * @return object
+	  **/
+    protected function getCustomer()
+    {
+    	return $this->_modelCustomer->load($this->_modelOrder->getCustomerId());
     }
     
     /**
@@ -59,7 +70,7 @@ class Cammino_Sps_Model_Boleto extends Cammino_Sps_Model_Sps {
 			'CIDADESACADO' 			  => $address['city'],
 			'UFSACADO' 				  => $address['state'],
 			'CEPSACADO' 			  => $address['zipcode'],
-			'CPFSACADO' 			  => preg_replace('/[^A-Za-z0-9]/', '', $this->_modelCustomer->taxvat),
+			'CPFSACADO' 			  => preg_replace('/[^A-Za-z0-9]/', '', $this->getCustomer()->taxvat),
 			'NUMEROPEDIDO' 			  => $orderId,
 			'VALORDOCUMENTOFORMATADO' => $this->getOrderTotal('R$'),
 			'SHOPPINGID' 			  => $this->getConfigdata("shopping_id"),
@@ -108,7 +119,7 @@ class Cammino_Sps_Model_Boleto extends Cammino_Sps_Model_Sps {
 	 **/
 	protected function getCustomerName()
 	{
-		return $this->clearString($this->_modelCustomer->firstname . " " . $this->_modelCustomer->lastname);
+		return $this->clearString($this->getCustomer()->firstname . " " . $this->getCustomer()->lastname);
 	}
 
 	/**
