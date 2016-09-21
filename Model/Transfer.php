@@ -38,13 +38,14 @@ class Cammino_Sps_Model_Transfer extends Cammino_Sps_Model_Sps {
 	{
 
 		$xml = $this->getOrderXml($orderId);
+		
 		$transfer = array(
 			'NUMEROAGENCIA' => $this->getConfigdata("agency"),
 			'NUMEROCONTA'   => $this->getConfigdata("account"),
 			'ASSINATURA'    => $this->getConfigdata("key")
 		);
 
-		$xml .= $this->generateXml( $transfer, 'TRANSFER _DESCRIPTION');
+		$xml .= $this->generateXml( $transfer, 'TRANSFER_DESCRIPTION');
 
 		return $xml;
 	}
