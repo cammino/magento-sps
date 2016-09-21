@@ -2,12 +2,12 @@
 
 class Cammino_Sps_Model_Transfer extends Cammino_Sps_Model_Sps {
 	
-	protected $_canAuthorize = true;
-	protected $_canCapture = true;
+	protected $_canAuthorize      = true;
+	protected $_canCapture        = true;
 	protected $_canCapturePartial = false;
-	protected $_code = 'sps_transfer';
-	protected $_formBlockType = 'sps/transfer_form';
-	protected $_infoBlockType = 'sps/transfer_info';
+	protected $_code              = 'sps_transfer';
+	protected $_formBlockType     = 'sps/transfer_form';
+	protected $_infoBlockType     = 'sps/transfer_info';
 
 	/**
 	  * Add addiotionalData to order.
@@ -25,7 +25,7 @@ class Cammino_Sps_Model_Transfer extends Cammino_Sps_Model_Sps {
 	  * @return string
 	  **/
 	public function getOrderPlaceRedirectUrl() {
-		return Mage::getUrl('sps/transfer/receipt');
+		return Mage::getUrl('sps/transfer/pay');
 	}
 
 	/**
