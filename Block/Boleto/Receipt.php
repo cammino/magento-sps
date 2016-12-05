@@ -14,7 +14,7 @@ class Cammino_Sps_Block_Boleto_Receipt extends Mage_Payment_Block_Form {
 		$status  = 'pending_payment';
 		$comment = 'Boleto gerado, aguardando pagamento.';
 
-		if ($this->_orderModel->getState() == "pending") {
+		if ($this->_orderModel->getState() == "new") {
 			$this->_orderModel->setState($state, $status, $comment, false);
 			$this->_orderModel->save();
 			$this->_orderModel->sendNewOrderEmail();
