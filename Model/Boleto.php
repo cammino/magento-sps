@@ -75,7 +75,7 @@ class Cammino_Sps_Model_Boleto extends Cammino_Sps_Model_Sps {
 			'VALORDOCUMENTOFORMATADO' => $this->getOrderTotal('R$'),
 			'SHOPPINGID' 			  => $this->getConfigdata("shopping_id"),
 			'NUMDOC'   				  => $orderId,
-			'CARTEIRA' 				  => 25,
+			'CARTEIRA' 				  => strval($this->getConfigdata("wallet")) == "" ? "25" : $wallet,
 			// 'ANONOSSONUMERO'          => 97,
 			// 'CIP'                     => 865
 		);
