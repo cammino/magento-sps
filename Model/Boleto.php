@@ -71,10 +71,10 @@ class Cammino_Sps_Model_Boleto extends Cammino_Sps_Model_Sps {
 			'UFSACADO' 				  => $address['state'],
 			'CEPSACADO' 			  => $address['zipcode'],
 			'CPFSACADO' 			  => preg_replace('/[^A-Za-z0-9]/', '', $this->getCustomer()->taxvat),
-			'NUMEROPEDIDO' 			  => $orderId,
+			'NUMEROPEDIDO' 			  => substr(strval($orderId), -9),
 			'VALORDOCUMENTOFORMATADO' => $this->getOrderTotal('R$'),
 			'SHOPPINGID' 			  => $this->getConfigdata("shopping_id"),
-			'NUMDOC'   				  => $orderId,
+			'NUMDOC'   				  => substr(strval($orderId), -9),
 			'CARTEIRA' 				  => strval($this->getConfigdata("wallet")) == "" ? "25" : strval($this->getConfigdata("wallet")),
 			// 'ANONOSSONUMERO'          => 97,
 			// 'CIP'                     => 865
