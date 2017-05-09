@@ -64,6 +64,8 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		$addressStreet = $this->clearString($billingAddress->street);
 		$addressCity = $this->clearString($billingAddress->city);
 		
+		$cpfCnpj = $customer->cpf ? $customer->cpf : $customer->cnpj;
+
 		$xml  = "<BEGIN_ORDER_DESCRIPTION>\n";
 		$xml .= "<orderid>=($orderCode)\n";
 		$xml .= "<descritivo>=(Pedido $orderId)\n";
@@ -85,7 +87,7 @@ class Cammino_Sps_Model_Boleto extends Mage_Payment_Model_Method_Abstract {
 		$xml .= "<CIDADESACADO>=(". $addressCity .")\n";
 		$xml .= "<UFSACADO>=(".$billingAddress->region.")\n";
 		$xml .= "<CEPSACADO>=(".preg_replace('/[^A-Za-z0-9]/', '', $billingAddress->postcode).")\n";
-		$xml .= "<CPFSACADO>=(".preg_replace('/[^A-Za-z0-9]/', '', $customer->cpf).")\n";
+		$xml .= "<CPFSACADO>=(".preg_replace('/[^A-Za-z0-9]/', '', $cpfCnpj).")\n";
 		$xml .= "<NUMEROPEDIDO>=($orderCode)\n";
 		$xml .= "<VALORDOCUMENTOFORMATADO>=(R$".number_format($orderTotal, 2, ",", ".").")\n";
 		$xml .= "<SHOPPINGID>=($shoppingId)\n";
